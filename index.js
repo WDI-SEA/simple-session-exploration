@@ -1,6 +1,5 @@
 var express = require("express");
 var session = require("express-session");
-var bcrypt = require("bcrypt");
 
 var app = express();
 app.use(session({
@@ -23,13 +22,8 @@ app.get("/", function(req, res) {
   // set the value of the session at that number to a random decimal.
   req.session[ran] = Math.random();
 
-  bcrypt.hash("secretpass", 10, function(err, hash) {
-    // add the crypted password to the session
-    req.session.password = hash;
-
-    // send the entire session back
-    res.send(req.session);
-  });
+  // send the raw session object back as data to the server
+  res.send(req.session);
 });
 
 app.listen(3000);

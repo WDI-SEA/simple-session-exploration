@@ -8,13 +8,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use(function(req, res, next) {
-  req.getUser = function() {
-    return session.user;
-  }
-  next();
-});
-
 app.get("/", function(req, res) {
   // pick a random number from 0-9
   var ran = Math.floor(Math.random() * 10);
